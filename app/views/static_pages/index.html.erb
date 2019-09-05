@@ -5,12 +5,7 @@
   </header>
   <section class="main">
     <ul class="todo-list">
-   <li>
-      <div class="view"><input class="toggle" type="checkbox"><label>Do laundry</label></div>
-   </li>
-   <li>
-      <div class="view"><input class="toggle" type="checkbox"><label>Make bed</label></div>
-   </li>
+   
 </ul>
   </section>
 </section>
@@ -26,7 +21,9 @@
         // pulls the "li" variable from todo
         // list the task non-completed and completed
         var liElement = '<li><div class="view"><input class="toggle" type="checkbox"' +
+        " data-id='" + task.id + "'" +
         checkedStatus +
+
         '><label>' +
          task.title +
          '</label></div></li>';
@@ -35,6 +32,22 @@
       // pulls the "ul" variable from todo
       var ulTodos = $('.todo-list');
       ulTodos.html(htmlString);
+    
+    $('.toggle').change(function(e) {
+        var itemId = $(e.target).data("id");
+        console.log(itemId);
+
+        var doneValue = Boolean($(e.target).is(':checked'));
+        console.log("done:", doneValue);
+
+        $.post("/tasks/" + itemId, {
+          _method: "PUT",
+          task: {
+            done: doneValue
+          }
+        });
+
+      });
 
     });
   });
