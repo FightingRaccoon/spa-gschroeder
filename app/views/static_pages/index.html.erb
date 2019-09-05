@@ -33,6 +33,7 @@
       var ulTodos = $('.todo-list');
       ulTodos.html(htmlString);
     
+    // allows if tasked to be toggled
     $('.toggle').change(function(e) {
         var itemId = $(e.target).data("id");
         console.log(itemId);

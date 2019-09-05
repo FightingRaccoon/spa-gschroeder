@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
     def index
       # list all Task that are stored
-        render json: Task.all
+        render json: Task.order(:id)
       end
     
       # method for updating task completed or not
