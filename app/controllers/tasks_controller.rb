@@ -13,11 +13,16 @@ class TasksController < ApplicationController
         # updates id task on page
         render json: task
       end
-    
+      
+      def create
+        task = Task.create(task_params)
+        render json: task
+      end
+      
       private
     # method for defining requirments of task
       def task_params
     # specified requirments
-        params.require(:task).permit(:done)
+        params.require(:task).permit(:done, :title)
       end
 end
